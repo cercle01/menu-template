@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Digital Menu</title>
 
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
 
     :root{
@@ -31,11 +34,16 @@
       background:var(--bg);
       color:var(--text);
       font-family:"Cairo",Arial,sans-serif;
+      transition:.2s;
     }
 
     a{
       color:inherit;
       text-decoration:none;
+    }
+
+    button{
+      font-family:inherit;
     }
 
     .container{
@@ -57,6 +65,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:20px;
     }
 
     .brand{
@@ -67,6 +76,12 @@
 
     .brand span{
       color:var(--accent);
+    }
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
     .nav-links{
@@ -81,6 +96,29 @@
       font-size:13px;
     }
 
+    /* LANGUAGE BUTTON */
+
+    .lang-switch{
+      display:flex;
+      border:1px solid var(--line);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .lang-switch button{
+      border:0;
+      background:transparent;
+      color:var(--text);
+      padding:7px 12px;
+      font-size:12px;
+      cursor:pointer;
+    }
+
+    .lang-switch button.active{
+      background:var(--text);
+      color:var(--bg);
+    }
+
     .hero{
       padding:100px 0 80px;
       border-bottom:1px solid var(--line);
@@ -91,6 +129,7 @@
       font-size:12px;
       letter-spacing:.16em;
       margin-bottom:20px;
+      direction:ltr;
     }
 
     h1{
@@ -170,6 +209,7 @@
       color:var(--accent);
       font-size:12px;
       letter-spacing:.15em;
+      direction:ltr;
     }
 
     .item{
@@ -302,69 +342,141 @@
         display:inline-block;
         margin-top:25px;
       }
+
+      .lang-switch button{
+        padding:6px 9px;
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
   <div class="container">
+
     <nav>
 
       <div class="brand" id="restaurantName">
         CIRCLE<span>01</span>
       </div>
 
-      <div class="nav-links">
-        <a href="#menu">المنيو</a>
-        <a href="#contact">تواصل</a>
+
+      <div class="nav-right">
+
+        <div class="nav-links">
+
+          <a href="#menu" id="navMenu">
+            المنيو
+          </a>
+
+          <a href="#contact" id="navContact">
+            تواصل
+          </a>
+
+        </div>
+
+
+        <div class="lang-switch">
+
+          <button
+            id="arBtn"
+            class="active"
+            onclick="setLanguage('ar')"
+          >
+            عربي
+          </button>
+
+          <button
+            id="enBtn"
+            onclick="setLanguage('en')"
+          >
+            EN
+          </button>
+
+        </div>
+
       </div>
 
     </nav>
+
   </div>
+
 </header>
 
 
+
 <section class="hero">
+
   <div class="container">
 
     <div class="eyebrow">
       DIGITAL MENU
     </div>
 
-    <h1 id="heroTitle">
-      اسم المطعم.<br>
-      <span>مزاج أفضل.</span>
-    </h1>
 
-    <p class="intro" id="heroIntro">
-      اكتشف قائمتنا واختر مشروبك أو وجبتك المفضلة.
-    </p>
+    <h1 id="heroTitle"></h1>
 
-    <a href="#menu" class="hero-btn">
+
+    <p
+      class="intro"
+      id="heroIntro"
+    ></p>
+
+
+    <a
+      href="#menu"
+      class="hero-btn"
+      id="heroButton"
+    >
       استعرض المنيو ↓
     </a>
 
   </div>
+
 </section>
 
 
+
 <div class="categories">
+
   <div class="container">
-    <div class="categories-inner" id="categoryNav"></div>
+
+    <div
+      class="categories-inner"
+      id="categoryNav"
+    ></div>
+
   </div>
+
 </div>
 
 
-<main id="menu" class="menu">
 
-  <div class="container" id="menuContainer"></div>
+<main
+  id="menu"
+  class="menu"
+>
+
+  <div
+    class="container"
+    id="menuContainer"
+  ></div>
 
 </main>
 
 
-<section class="contact" id="contact">
+
+<section
+  class="contact"
+  id="contact"
+>
 
   <div class="container">
 
@@ -372,15 +484,12 @@
 
       <div>
 
-        <h2 id="contactTitle">
-          أكثر من مجرد منيو.
-        </h2>
+        <h2 id="contactTitle"></h2>
 
-        <p id="contactInfo">
-          تصميم رقمي بسيط، سريع واحترافي.
-        </p>
+        <p id="contactInfo"></p>
 
       </div>
+
 
       <a
         class="contact-btn"
@@ -397,180 +506,443 @@
 </section>
 
 
+
 <footer>
+
   <div class="container">
-    © 2026 <span id="footerName">CIRCLE01</span> · Digital Menu
+
+    © 2026
+
+    <span id="footerName">
+      CIRCLE01
+    </span>
+
+    · Digital Menu
+
   </div>
+
 </footer>
 
 
+
 <script>
+
+let currentLanguage = "ar";
+
+let menuData = null;
+
+
+
+const staticTranslations = {
+
+  navMenu:{
+    ar:"المنيو",
+    en:"Menu"
+  },
+
+  navContact:{
+    ar:"تواصل",
+    en:"Contact"
+  },
+
+  heroButton:{
+    ar:"استعرض المنيو ↓",
+    en:"View Menu ↓"
+  },
+
+  heroIntro:{
+    ar:"اكتشف قائمتنا واختر مشروبك أو وجبتك المفضلة.",
+    en:"Explore our menu and choose your favorite drink or meal."
+  },
+
+  contactTitle:{
+    ar:"أكثر من مجرد منيو.",
+    en:"More than a menu."
+  },
+
+  contactButton:{
+    ar:"تواصل معنا",
+    en:"Contact Us"
+  },
+
+  fallbackContact:{
+    ar:"تصميم رقمي بسيط، سريع واحترافي.",
+    en:"Simple, fast and professional digital design."
+  }
+
+};
+
+
 
 async function loadMenu(){
 
   try{
 
-    const response = await fetch("menu-data.json");
+    const response =
+      await fetch("menu-data.json");
 
     if(!response.ok){
-      throw new Error("menu-data.json not found");
+
+      throw new Error(
+        "menu-data.json not found"
+      );
+
     }
 
-    const data = await response.json();
+    menuData =
+      await response.json();
 
-    renderMenu(data);
 
-  }catch(error){
+    renderMenu();
 
-    document.getElementById("menuContainer").innerHTML = `
-      <p style="padding:40px 0;color:#9e5521">
-        تعذر تحميل بيانات المنيو.
-      </p>
-    `;
+  }
+
+  catch(error){
+
+    document
+      .getElementById("menuContainer")
+      .innerHTML = `
+
+        <p
+          style="
+            padding:40px 0;
+            color:#9e5521;
+          "
+        >
+          تعذر تحميل بيانات المنيو.
+        </p>
+
+      `;
 
     console.error(error);
+
   }
+
 }
 
 
-function renderMenu(data){
 
-  document.title = data.restaurant + " — Digital Menu";
+function setLanguage(language){
 
-  document.getElementById("restaurantName").innerHTML =
-    data.restaurant;
-
-  document.getElementById("footerName").textContent =
-    data.restaurant;
+  currentLanguage =
+    language;
 
 
-  document.getElementById("heroTitle").innerHTML = `
-    ${data.restaurant}.<br>
-    <span>${data.tagline}</span>
+  document.documentElement.lang =
+    language;
+
+
+  document.documentElement.dir =
+    language === "ar"
+      ? "rtl"
+      : "ltr";
+
+
+  document
+    .getElementById("arBtn")
+    .classList
+    .toggle(
+      "active",
+      language === "ar"
+    );
+
+
+  document
+    .getElementById("enBtn")
+    .classList
+    .toggle(
+      "active",
+      language === "en"
+    );
+
+
+  renderMenu();
+
+}
+
+
+
+function renderMenu(){
+
+  if(!menuData){
+    return;
+  }
+
+
+  const lang =
+    currentLanguage;
+
+
+  const restaurant =
+    menuData.restaurant;
+
+
+  const tagline =
+    menuData.tagline;
+
+
+  document.title =
+    `${restaurant[lang]} — Digital Menu`;
+
+
+  document
+    .getElementById("restaurantName")
+    .textContent =
+      restaurant[lang];
+
+
+  document
+    .getElementById("footerName")
+    .textContent =
+      restaurant[lang];
+
+
+  document
+    .getElementById("heroTitle")
+    .innerHTML = `
+
+      ${restaurant[lang]}.<br>
+
+      <span>
+        ${tagline[lang]}
+      </span>
+
   `;
 
 
-  document.getElementById("heroIntro").textContent =
-    "اكتشف قائمتنا واختر مشروبك أو وجبتك المفضلة.";
+  document
+    .getElementById("heroIntro")
+    .textContent =
+      staticTranslations.heroIntro[lang];
+
+
+  document
+    .getElementById("heroButton")
+    .textContent =
+      staticTranslations.heroButton[lang];
+
+
+  document
+    .getElementById("contactTitle")
+    .textContent =
+      staticTranslations.contactTitle[lang];
+
+
+  document
+    .getElementById("contactButton")
+    .textContent =
+      staticTranslations.contactButton[lang];
+
+
+  const navMenu =
+    document.getElementById("navMenu");
+
+  const navContact =
+    document.getElementById("navContact");
+
+
+  navMenu.textContent =
+    staticTranslations.navMenu[lang];
+
+  navContact.textContent =
+    staticTranslations.navContact[lang];
+
+
+  let contactText = "";
+
+
+  if(menuData.address){
+
+    contactText +=
+      menuData.address[lang];
+
+  }
+
+
+  if(menuData.hours){
+
+    if(contactText){
+      contactText += " · ";
+    }
+
+    contactText +=
+      menuData.hours[lang];
+
+  }
+
+
+  if(!contactText){
+
+    contactText =
+      staticTranslations.fallbackContact[lang];
+
+  }
+
+
+  document
+    .getElementById("contactInfo")
+    .textContent =
+      contactText;
 
 
   const categoryNav =
-    document.getElementById("categoryNav");
+    document.getElementById(
+      "categoryNav"
+    );
+
 
   const menuContainer =
-    document.getElementById("menuContainer");
+    document.getElementById(
+      "menuContainer"
+    );
 
 
   categoryNav.innerHTML = "";
+
   menuContainer.innerHTML = "";
 
 
-  data.sections.forEach((section,index)=>{
-
-    const sectionId = `section-${index+1}`;
-
-
-    const category =
-      document.createElement("a");
-
-    category.className = "category";
-
-    category.href = `#${sectionId}`;
-
-    category.textContent = section.name;
-
-    categoryNav.appendChild(category);
+  menuData.sections.forEach(
+    (section,index)=>{
 
 
-    const sectionElement =
-      document.createElement("section");
-
-    sectionElement.className =
-      "menu-section";
-
-    sectionElement.id =
-      sectionId;
+      const sectionId =
+        `section-${index+1}`;
 
 
-    sectionElement.innerHTML = `
-      <div class="section-head">
-
-        <h2>${section.name}</h2>
-
-        <span class="section-number">
-          ${String(index+1).padStart(2,"0")}
-        </span>
-
-      </div>
-    `;
+      const category =
+        document.createElement("a");
 
 
-    section.items.forEach(item=>{
-
-      const article =
-        document.createElement("article");
-
-      article.className = "item";
+      category.className =
+        "category";
 
 
-      article.innerHTML = `
+      category.href =
+        `#${sectionId}`;
 
-        <img
-          class="item-image"
-          src="${item.image}"
-          alt="${item.name}"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
 
-        <div class="item-info">
+      category.textContent =
+        section.name[lang];
 
-          <div class="item-name">
-            ${item.name}
-          </div>
 
-          <div class="item-price">
-            ${Number(item.price).toLocaleString("en-US")}
-            <small>IQD</small>
-          </div>
+      categoryNav.appendChild(
+        category
+      );
+
+
+      const sectionElement =
+        document.createElement("section");
+
+
+      sectionElement.className =
+        "menu-section";
+
+
+      sectionElement.id =
+        sectionId;
+
+
+      sectionElement.innerHTML = `
+
+        <div class="section-head">
+
+          <h2>
+            ${section.name[lang]}
+          </h2>
+
+          <span class="section-number">
+            ${String(index+1).padStart(2,"0")}
+          </span>
 
         </div>
 
       `;
 
 
-      sectionElement.appendChild(article);
-
-    });
-
-
-    menuContainer.appendChild(sectionElement);
-
-  });
+      section.items.forEach(
+        item=>{
 
 
-  if(data.phone){
+          const article =
+            document.createElement(
+              "article"
+            );
 
-    document.getElementById("contactButton").href =
-      "tel:" + data.phone;
 
-  }
+          article.className =
+            "item";
 
-  if(data.address || data.hours){
 
-    document.getElementById("contactInfo").textContent =
-      [data.address,data.hours]
-      .filter(Boolean)
-      .join(" · ");
+          article.innerHTML = `
+
+            <img
+              class="item-image"
+              src="${item.image}"
+              alt="${item.name[lang]}"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            >
+
+
+            <div class="item-info">
+
+              <div class="item-name">
+                ${item.name[lang]}
+              </div>
+
+
+              <div class="item-price">
+
+                ${Number(item.price)
+                  .toLocaleString("en-US")}
+
+                <small>
+                  IQD
+                </small>
+
+              </div>
+
+            </div>
+
+          `;
+
+
+          sectionElement.appendChild(
+            article
+          );
+
+        }
+      );
+
+
+      menuContainer.appendChild(
+        sectionElement
+      );
+
+    }
+  );
+
+
+  if(menuData.phone){
+
+    document
+      .getElementById("contactButton")
+      .href =
+        "tel:" +
+        menuData.phone;
 
   }
 
 }
 
 
+
 loadMenu();
 
 </script>
 
+
 </body>
+
 </html>
