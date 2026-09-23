@@ -3,28 +3,45 @@
     "ar": "اسم المطعم",
     "en": "Restaurant Name"
   },
+
   "tagline": {
     "ar": "مزاج أفضل.",
     "en": "Better Mood."
   },
+
   "address": {
     "ar": "العنوان",
     "en": "Address"
   },
+
   "phone": "+9640000000000",
+
   "instagram": "username",
+
   "tiktok": "username",
+
   "hours": {
     "ar": "يوميًا 7:00 ص – 1:00 ص",
     "en": "Daily 7:00 AM – 1:00 AM"
   },
+
+  "theme": {
+    "background": "#f4ebdc",
+    "text": "#0b0705",
+    "accent": "#9e5521",
+    "muted": "#6e655c"
+  },
+
   "sections": [
+
     {
       "name": {
         "ar": "القهوة",
         "en": "Coffee"
       },
+
       "items": [
+
         {
           "name": {
             "ar": "إسبريسو",
@@ -33,6 +50,7 @@
           "price": 4000,
           "image": "images/espresso.jpg"
         },
+
         {
           "name": {
             "ar": "لاتيه",
@@ -41,14 +59,18 @@
           "price": 5000,
           "image": "images/latte.jpg"
         }
+
       ]
     },
+
     {
       "name": {
         "ar": "المشروبات",
         "en": "Drinks"
       },
+
       "items": [
+
         {
           "name": {
             "ar": "آيس تي",
@@ -57,14 +79,18 @@
           "price": 3500,
           "image": "images/iced-tea.jpg"
         }
+
       ]
     },
+
     {
       "name": {
         "ar": "الحلويات",
         "en": "Desserts"
       },
+
       "items": [
+
         {
           "name": {
             "ar": "تشيز كيك",
@@ -73,7 +99,9 @@
           "price": 5000,
           "image": "images/cheesecake.jpg"
         }
+
       ]
     }
+
   ]
 }
