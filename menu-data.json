@@ -1,0 +1,49 @@
+{
+  "restaurant": "اسم المطعم",
+  "tagline": "مزاج أفضل.",
+  "address": "العنوان",
+  "phone": "+964 000 000 0000",
+  "instagram": "username",
+  "tiktok": "username",
+  "hours": "يوميًا 7:00 ص – 1:00 ص",
+
+  "sections": [
+    {
+      "name": "القهوة",
+      "items": [
+        {
+          "name": "إسبريسو",
+          "price": 4000,
+          "image": "images/espresso.jpg"
+        },
+        {
+          "name": "لاتيه",
+          "price": 5000,
+          "image": "images/latte.jpg"
+        }
+      ]
+    },
+
+    {
+      "name": "المشروبات",
+      "items": [
+        {
+          "name": "آيس تي",
+          "price": 3500,
+          "image": "images/iced-tea.jpg"
+        }
+      ]
+    },
+
+    {
+      "name": "الحلويات",
+      "items": [
+        {
+          "name": "تشيز كيك",
+          "price": 5000,
+          "image": "images/cheesecake.jpg"
+        }
+      ]
+    }
+  ]
+}
