@@ -13,10 +13,8 @@
       --bg:#f4ebdc;
       --text:#0b0705;
       --accent:#9e5521;
-      --accent-light:#d48d43;
       --muted:#6e655c;
       --line:rgba(11,7,5,.15);
-      --card:#fffaf2;
     }
 
     *{
@@ -45,13 +43,11 @@
       margin:auto;
     }
 
-    /* HEADER */
-
     header{
       position:sticky;
       top:0;
       z-index:20;
-      background:rgba(244,235,220,.94);
+      background:rgba(244,235,220,.95);
       backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
@@ -61,7 +57,6 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
     }
 
     .brand{
@@ -85,8 +80,6 @@
       padding:7px 15px;
       font-size:13px;
     }
-
-    /* HERO */
 
     .hero{
       padding:100px 0 80px;
@@ -127,8 +120,6 @@
       font-size:14px;
     }
 
-    /* CATEGORIES */
-
     .categories{
       position:sticky;
       top:76px;
@@ -152,8 +143,6 @@
       padding:7px 15px;
       font-size:13px;
     }
-
-    /* MENU */
 
     .menu{
       padding:30px 0 90px;
@@ -181,7 +170,6 @@
       color:var(--accent);
       font-size:12px;
       letter-spacing:.15em;
-      direction:ltr;
     }
 
     .item{
@@ -226,8 +214,6 @@
       font-weight:400;
     }
 
-    /* CONTACT */
-
     .contact{
       background:var(--text);
       color:var(--bg);
@@ -259,8 +245,6 @@
       white-space:nowrap;
     }
 
-    /* FOOTER */
-
     footer{
       background:var(--text);
       color:#8d8175;
@@ -268,8 +252,6 @@
       padding:24px 0;
       font-size:12px;
     }
-
-    /* MOBILE */
 
     @media(max-width:700px){
 
@@ -287,10 +269,6 @@
 
       h1{
         font-size:57px;
-      }
-
-      .categories{
-        top:76px;
       }
 
       .item{
@@ -333,7 +311,8 @@
 <header>
   <div class="container">
     <nav>
-      <div class="brand">
+
+      <div class="brand" id="restaurantName">
         CIRCLE<span>01</span>
       </div>
 
@@ -341,6 +320,7 @@
         <a href="#menu">المنيو</a>
         <a href="#contact">تواصل</a>
       </div>
+
     </nav>
   </div>
 </header>
@@ -353,12 +333,12 @@
       DIGITAL MENU
     </div>
 
-    <h1>
+    <h1 id="heroTitle">
       اسم المطعم.<br>
       <span>مزاج أفضل.</span>
     </h1>
 
-    <p class="intro">
+    <p class="intro" id="heroIntro">
       اكتشف قائمتنا واختر مشروبك أو وجبتك المفضلة.
     </p>
 
@@ -372,116 +352,14 @@
 
 <div class="categories">
   <div class="container">
-    <div class="categories-inner">
-
-      <a class="category" href="#section1">القهوة</a>
-      <a class="category" href="#section2">المشروبات</a>
-      <a class="category" href="#section3">الحلويات</a>
-
-    </div>
+    <div class="categories-inner" id="categoryNav"></div>
   </div>
 </div>
 
 
 <main id="menu" class="menu">
 
-  <div class="container">
-
-    <section class="menu-section" id="section1">
-
-      <div class="section-head">
-        <h2>القهوة</h2>
-        <span class="section-number">01</span>
-      </div>
-
-      <article class="item">
-
-        <div class="item-image"></div>
-
-        <div class="item-info">
-          <div class="item-name">
-            إسبريسو
-          </div>
-
-          <div class="item-price">
-            4,000 <small>IQD</small>
-          </div>
-        </div>
-
-      </article>
-
-
-      <article class="item">
-
-        <div class="item-image"></div>
-
-        <div class="item-info">
-          <div class="item-name">
-            لاتيه
-          </div>
-
-          <div class="item-price">
-            5,000 <small>IQD</small>
-          </div>
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <section class="menu-section" id="section2">
-
-      <div class="section-head">
-        <h2>المشروبات</h2>
-        <span class="section-number">02</span>
-      </div>
-
-      <article class="item">
-
-        <div class="item-image"></div>
-
-        <div class="item-info">
-          <div class="item-name">
-            آيس تي
-          </div>
-
-          <div class="item-price">
-            3,500 <small>IQD</small>
-          </div>
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <section class="menu-section" id="section3">
-
-      <div class="section-head">
-        <h2>الحلويات</h2>
-        <span class="section-number">03</span>
-      </div>
-
-      <article class="item">
-
-        <div class="item-image"></div>
-
-        <div class="item-info">
-          <div class="item-name">
-            تشيز كيك
-          </div>
-
-          <div class="item-price">
-            5,000 <small>IQD</small>
-          </div>
-        </div>
-
-      </article>
-
-    </section>
-
-  </div>
+  <div class="container" id="menuContainer"></div>
 
 </main>
 
@@ -493,16 +371,22 @@
     <div class="contact-inner">
 
       <div>
-        <h2>
+
+        <h2 id="contactTitle">
           أكثر من مجرد منيو.
         </h2>
 
-        <p>
+        <p id="contactInfo">
           تصميم رقمي بسيط، سريع واحترافي.
         </p>
+
       </div>
 
-      <a class="contact-btn" href="#">
+      <a
+        class="contact-btn"
+        id="contactButton"
+        href="#"
+      >
         تواصل معنا
       </a>
 
@@ -515,9 +399,178 @@
 
 <footer>
   <div class="container">
-    © 2026 CIRCLE01 · Digital Menu
+    © 2026 <span id="footerName">CIRCLE01</span> · Digital Menu
   </div>
 </footer>
+
+
+<script>
+
+async function loadMenu(){
+
+  try{
+
+    const response = await fetch("menu-data.json");
+
+    if(!response.ok){
+      throw new Error("menu-data.json not found");
+    }
+
+    const data = await response.json();
+
+    renderMenu(data);
+
+  }catch(error){
+
+    document.getElementById("menuContainer").innerHTML = `
+      <p style="padding:40px 0;color:#9e5521">
+        تعذر تحميل بيانات المنيو.
+      </p>
+    `;
+
+    console.error(error);
+  }
+}
+
+
+function renderMenu(data){
+
+  document.title = data.restaurant + " — Digital Menu";
+
+  document.getElementById("restaurantName").innerHTML =
+    data.restaurant;
+
+  document.getElementById("footerName").textContent =
+    data.restaurant;
+
+
+  document.getElementById("heroTitle").innerHTML = `
+    ${data.restaurant}.<br>
+    <span>${data.tagline}</span>
+  `;
+
+
+  document.getElementById("heroIntro").textContent =
+    "اكتشف قائمتنا واختر مشروبك أو وجبتك المفضلة.";
+
+
+  const categoryNav =
+    document.getElementById("categoryNav");
+
+  const menuContainer =
+    document.getElementById("menuContainer");
+
+
+  categoryNav.innerHTML = "";
+  menuContainer.innerHTML = "";
+
+
+  data.sections.forEach((section,index)=>{
+
+    const sectionId = `section-${index+1}`;
+
+
+    const category =
+      document.createElement("a");
+
+    category.className = "category";
+
+    category.href = `#${sectionId}`;
+
+    category.textContent = section.name;
+
+    categoryNav.appendChild(category);
+
+
+    const sectionElement =
+      document.createElement("section");
+
+    sectionElement.className =
+      "menu-section";
+
+    sectionElement.id =
+      sectionId;
+
+
+    sectionElement.innerHTML = `
+      <div class="section-head">
+
+        <h2>${section.name}</h2>
+
+        <span class="section-number">
+          ${String(index+1).padStart(2,"0")}
+        </span>
+
+      </div>
+    `;
+
+
+    section.items.forEach(item=>{
+
+      const article =
+        document.createElement("article");
+
+      article.className = "item";
+
+
+      article.innerHTML = `
+
+        <img
+          class="item-image"
+          src="${item.image}"
+          alt="${item.name}"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="item-info">
+
+          <div class="item-name">
+            ${item.name}
+          </div>
+
+          <div class="item-price">
+            ${Number(item.price).toLocaleString("en-US")}
+            <small>IQD</small>
+          </div>
+
+        </div>
+
+      `;
+
+
+      sectionElement.appendChild(article);
+
+    });
+
+
+    menuContainer.appendChild(sectionElement);
+
+  });
+
+
+  if(data.phone){
+
+    document.getElementById("contactButton").href =
+      "tel:" + data.phone;
+
+  }
+
+  if(data.address || data.hours){
+
+    document.getElementById("contactInfo").textContent =
+      [data.address,data.hours]
+      .filter(Boolean)
+      .join(" · ");
+
+  }
+
+}
+
+
+loadMenu();
+
+</script>
 
 </body>
 </html>
