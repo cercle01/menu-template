@@ -563,6 +563,8 @@ let currentLanguage = "ar";
 let menuData = null;
 
 
+/* TRANSLATIONS */
+
 const staticTranslations = {
 
 navMenu:{
@@ -603,6 +605,8 @@ en:"Simple, fast and professional digital design."
 };
 
 
+/* LOAD DATA */
+
 async function loadMenu(){
 
 try{
@@ -620,6 +624,9 @@ throw new Error(
 
 menuData =
 await response.json();
+
+
+applyTheme();
 
 renderMenu();
 
@@ -649,13 +656,84 @@ console.error(error);
 }
 
 
+/* APPLY THEME */
+
+function applyTheme(){
+
+if(!menuData || !menuData.theme){
+return;
+}
+
+
+const root =
+document.documentElement;
+
+
+const theme =
+menuData.theme;
+
+
+if(theme.background){
+
+root.style.setProperty(
+"--bg",
+theme.background
+);
+
+}
+
+
+if(theme.text){
+
+root.style.setProperty(
+"--text",
+theme.text
+);
+
+}
+
+
+if(theme.accent){
+
+root.style.setProperty(
+"--accent",
+theme.accent
+);
+
+}
+
+
+if(theme.muted){
+
+root.style.setProperty(
+"--muted",
+theme.muted
+);
+
+
+/* update border color */
+
+root.style.setProperty(
+"--line",
+"rgba(11,7,5,.15)"
+);
+
+}
+
+}
+
+
+/* LANGUAGE */
+
 function setLanguage(language){
 
 currentLanguage =
 language;
 
+
 document.documentElement.lang =
 language;
+
 
 document.documentElement.dir =
 language === "ar"
@@ -686,6 +764,8 @@ renderMenu();
 }
 
 
+/* RENDER */
+
 function renderMenu(){
 
 if(!menuData){
@@ -705,15 +785,21 @@ const tagline =
 menuData.tagline;
 
 
+/* TITLE */
+
 document.title =
 `${restaurant[lang]} — Digital Menu`;
 
+
+/* FOOTER */
 
 document
 .getElementById("footerName")
 .textContent =
 restaurant[lang];
 
+
+/* HERO */
 
 document
 .getElementById("heroTitle")
@@ -740,17 +826,7 @@ document
 staticTranslations.heroButton[lang];
 
 
-document
-.getElementById("contactTitle")
-.textContent =
-staticTranslations.contactTitle[lang];
-
-
-document
-.getElementById("contactButton")
-.textContent =
-staticTranslations.contactButton[lang];
-
+/* NAV */
 
 document
 .getElementById("navMenu")
@@ -762,6 +838,20 @@ document
 .getElementById("navContact")
 .textContent =
 staticTranslations.navContact[lang];
+
+
+/* CONTACT */
+
+document
+.getElementById("contactTitle")
+.textContent =
+staticTranslations.contactTitle[lang];
+
+
+document
+.getElementById("contactButton")
+.textContent =
+staticTranslations.contactButton[lang];
 
 
 let contactText = "";
@@ -778,7 +868,9 @@ menuData.address[lang];
 if(menuData.hours){
 
 if(contactText){
+
 contactText += " · ";
+
 }
 
 contactText +=
@@ -801,6 +893,8 @@ document
 contactText;
 
 
+/* MENU */
+
 const categoryNav =
 document.getElementById(
 "categoryNav"
@@ -821,32 +915,43 @@ menuContainer.innerHTML = "";
 menuData.sections.forEach(
 (section,index)=>{
 
+
 const sectionId =
 `section-${index+1}`;
 
 
+/* CATEGORY */
+
 const category =
 document.createElement("a");
+
 
 category.className =
 "category";
 
+
 category.href =
 `#${sectionId}`;
 
+
 category.textContent =
 section.name[lang];
+
 
 categoryNav.appendChild(
 category
 );
 
 
+/* SECTION */
+
 const sectionElement =
 document.createElement("section");
 
+
 sectionElement.className =
 "menu-section";
+
 
 sectionElement.id =
 sectionId;
@@ -869,13 +974,17 @@ ${String(index+1).padStart(2,"0")}
 `;
 
 
+/* ITEMS */
+
 section.items.forEach(
 item=>{
+
 
 const article =
 document.createElement(
 "article"
 );
+
 
 article.className =
 "item";
@@ -926,9 +1035,10 @@ menuContainer.appendChild(
 sectionElement
 );
 
-}
-);
+});
 
+
+/* PHONE */
 
 if(menuData.phone){
 
@@ -943,10 +1053,13 @@ menuData.phone;
 }
 
 
+/* START */
+
 loadMenu();
 
 </script>
 
 
 </body>
+
 </html>
